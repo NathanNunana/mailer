@@ -2,6 +2,7 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const ejs = require("ejs");
 const path = require("path");
+
 require("dotenv").config();
 
 const app = express();
@@ -12,16 +13,19 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set("view engine", "ejs");
 
-app.set("views", path.join(__dirname, "views")); 
-
 app.use(express.static('public'));
+
+app.set("views", path.join(__dirname, "views"));
 
 app.get("/", (req, res) => {
   res.render("index", { error: null });
 });
 
 app.post("/send-email", async (req, res) => {
+  console.log("trigegr")
   const { to, subject, message } = req.body;
+
+  console.log(to, subject, message)
 
   try {
     const transporter = nodemailer.createTransport({

@@ -9,14 +9,14 @@
 <body>
     <div class="container">
         <h1>Beksful</h1>
-        <form action="/send-email" method="post" onsubmit="return onSubmit()">
+        <form id="emailForm" action="/send-email" method="post">
             <label for="to">To:</label>
             <input type="email" name="to" required>
             <label for="subject">Subject:</label>
             <input type="text" name="subject" required>
             <label for="message">Message:</label>
             <textarea name="message" required></textarea>
-            <button id="submit-btn" type="submit">Send Email</button>
+            <button id="submit-btn" type="submit" onclick="submitForm()">Send Email</button>
             <div id="loading-spinner"></div>
         </form>
         <% if (error) { %>
@@ -24,18 +24,18 @@
         <% } %>
     </div>
     <script>
-        function onSubmit() {
+        function submitForm() {
             const submitBtn = document.getElementById('submit-btn');
             const loadingSpinner = document.getElementById('loading-spinner');
         
             submitBtn.classList.add('loading');
             loadingSpinner.style.display = 'block';
         
-            setTimeout(() => {
-                submitBtn.classList.remove('loading');
-                loadingSpinner.style.display = 'none';
-            }, 3000);       
-            return false;
+            // Optionally, you can disable the button to prevent multiple submissions
+            submitBtn.disabled = true;
+
+            // Continue with the form submission
+            document.getElementById('emailForm').submit();
         }
     </script>
 </body>
