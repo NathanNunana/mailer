@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material Design Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Beskful</h1>
+        <form action="/send-email" method="post" onsubmit="return onSubmit()">
+            <label for="to">To:</label>
+            <input type="email" name="to" required>
+            <label for="subject">Subject:</label>
+            <input type="text" name="subject" required>
+            <label for="message">Message:</label>
+            <textarea name="message" required></textarea>
+            <button id="submit-btn" type="submit">Send Email</button>
+            <div id="loading-spinner"></div>
+        </form>
+        <% if (error) { %>
+            <p class="error"><%= error %></p>
+        <% } %>
+    </div>
+    <script>
+        function onSubmit() {
+            const submitBtn = document.getElementById('submit-btn');
+            const loadingSpinner = document.getElementById('loading-spinner');
+        
+            submitBtn.classList.add('loading');
+            loadingSpinner.style.display = 'block';
+        
+            setTimeout(() => {
+                submitBtn.classList.remove('loading');
+                loadingSpinner.style.display = 'none';
+            }, 3000);       
+            return false;
+        }
+    </script>
+</body>
+</html>
