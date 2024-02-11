@@ -1,23 +1,26 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $to = $_POST["to"];
-    $subject = $_POST["subject"];
-    $message = $_POST["message"];
+  // $full_name = $_POST["full_name"];
+  // $email = $_POST["email"];
 
-    $headers = "From: nate.ku24@gmail.com";
+  $message = $_POST["message"];
+  $to = $_POST["to"];
+  $subject = $_POST["subject"];
+  $headers = "From: $to\r\n";
+  $headers .= "Reply-To: $to\r\n";
 
-    echo "To: " . $to . "<br>";
-    echo "Subject: " . $subject . "<br>";
-
-    if (mail($to, $subject, $message, $headers)) {
-        echo "Message sent successfully";
-    } else {
-        echo "Failed to send message";
-        // Check for additional details about the error
-        echo "Error: " . error_get_last()['message'];
-    }
+  
+  if (mail($to, $subject, $message, $headers)) {
+    echo '<script type="text/javascript">';
+    echo 'alert("Your message was sent!");';
+    echo 'window.location.href = "index.html";';
+    echo '</script>';
+  } else {
+    echo '<script type="text/javascript">';
+    echo 'alert("Failed to send your message!");';
+    echo 'window.location.href = "index.html";'; 
+    echo '</script>';
+  }
 }
 ?>
