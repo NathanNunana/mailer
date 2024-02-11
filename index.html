@@ -1,22 +1,3 @@
-<?php
-echo "Running";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $to = $_POST["to"];
-    $subject = $_POST["subject"];
-    $message = $_POST["message"];
-
-    $headers = "From: nate.ku24@gmail.com";
-
-    if (mail($to, $subject, $message, $headers)) {
-        echo "Message sent successfully";
-    } else {
-        echo "Failed to send message";
-        // Check for additional details about the error
-        echo "Error: " . error_get_last()['message'];
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <label for="message">Message:</label>
     <textarea name="message" required></textarea>
     <br>
-    <input type="submit" value="Send Email">
+    <input type="submit" value="Submit" name="submit">
   </form>
 </body>
 </html>
